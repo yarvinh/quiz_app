@@ -1,8 +1,10 @@
 # Quiz
+Soccer quiz
+This Ruby Gem is for people who love soccer.  
+This Gem is based on the most important soccer competitions and players.
+Do you want to know how much you know about soccer?
+Take this quiz of 10 questions.
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/quiz`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
 
 ## Installation
 
