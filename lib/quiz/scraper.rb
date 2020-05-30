@@ -1,0 +1,52 @@
+# require 'nokogiri'
+# require 'open-uri'
+
+#scraper Class
+class Quiz::Scraper
+    def self.scraper(url,clas)
+        doc = Nokogiri::HTML(open(url))
+        doc.css(clas)
+    end
+
+    def self.balon_d_or_players(url,clas)
+        players = self.scraper(url,clas).map{|l|l.text.split(/\t|\*/).reject{|e|e.empty? || e.include?("(FIFA Balón de Oro)")}}
+        2.times{players[0].shift}
+        players[0][16] = "Lionel Messi"
+        counter = 0
+        all_players = []
+        while counter < players[0].size
+            all_players << {:winner => players[0][counter],:year => players[0][counter + 1]}
+            counter += 2
+        end
+            all_players
+    end
+
+  
+    def self.world_cup(url,clas)
+        world_cup = self.scraper(url,clas).map{|l|l.text.split(/\r\n|\s{2,}/).reject{|e|e.empty?}}
+        counter = 0 
+        all_countries = []
+        while counter < world_cup[0].size
+            all_countries << {:year => world_cup[0][counter], :host => world_cup[0][counter + 1], :winner => world_cup[0][counter + 2], :runner_up => world_cup[0][counter + 3], :thirth_place => world_cup[0][counter + 4]}
+            counter += 9
+       end
+       all_countries
+    end
+
+   def self.champion_league(url,clas)
+        champions = self.scraper(url,clas).map{|l|l.text.split("\n").reject{|e|e.empty?}}
+        2.times{champions.shift}
+        10.times{champions[0].shift}
+        22.times{champions[0].pop}
+        champions[0].map{|item|item.strip}
+        counter = 0
+        all_teams = []
+        while  counter < champions[0].size
+           all_teams << {:year => champions[0][counter], :winner => champions[0][counter + 2], :score => champions[0][counter + 3], :runner_up => champions[0][counter + 5], :host => champions[0][counter + 6]} 
+           counter += 8                       
+        end
+        all_teams
+   end
+end
+
+
