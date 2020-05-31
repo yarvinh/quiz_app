@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.homepage      = "https://rubygems.org/gems/soccer_quiz"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
-
+ 
 # spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
 
 #   # spec.metadata["homepage_uri"] = spec.homepage
@@ -23,7 +23,7 @@ Gem::Specification.new do |spec|
     # spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
     #      `git ls-files -z`.split("\x0").reject { |f|  f.match(%r{^(test|spec|features)/}) }
     # end
-  spec.files = ["lib/quiz.rb","lib/quiz/balon_d_or.rb","lib/quiz/cli.rb","lib/quiz/champion_league.rb","lib/quiz/scraper.rb","lib/quiz/version.rb","lib/quiz/world_cup.rb","config/environment.rb"]
+  spec.files = ["bin/quiz","lib/quiz.rb","lib/quiz/balon_d_or.rb","lib/quiz/cli.rb","lib/quiz/champion_league.rb","lib/quiz/scraper.rb","lib/quiz/version.rb","lib/quiz/world_cup.rb","config/environment.rb"]
     # spec.bindir        = "exe"
   spec.require_paths = ["lib"]
    spec.executables << "quiz"
