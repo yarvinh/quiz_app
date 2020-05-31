@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
 
   spec.summary       = "10 questions quiz about soccer."
   spec.description   = "Find out how much you know about soccer."
-   spec.homepage      = "https://github.com/yarvinh/quiz_app"
+  spec.homepage      = "https://rubygems.org/gems/soccer_quiz"
   spec.license       = "MIT"
   spec.required_ruby_version = Gem::Requirement.new(">= 2.3.0")
 
@@ -26,8 +26,8 @@ Gem::Specification.new do |spec|
   spec.files = ["lib/quiz.rb","lib/quiz/balon_d_or.rb","lib/quiz/cli.rb","lib/quiz/champion_league.rb","lib/quiz/scraper.rb","lib/quiz/version.rb","lib/quiz/world_cup.rb","config/environment.rb"]
     # spec.bindir        = "exe"
   spec.require_paths = ["lib"]
-  # spec.executables << "quiz"
-   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+   spec.executables << "quiz"
+  #  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rspec"
