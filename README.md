@@ -7,20 +7,9 @@ Take this quiz of 10 questions.
 
 
 ## Installation
+Install it yourself as:
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'quiz'
-```
-
-And then execute:
-
-    $ bundle install
-
-Or install it yourself as:
-
-    $ gem install quiz
+$ gem install soccer-quiz
 
 ## Usage
 
