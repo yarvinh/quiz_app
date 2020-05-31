@@ -20,11 +20,13 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install quiz
+    $ gem install quiz-0.1.0.gem
 
 ## Usage
 
-TODO: Write usage instructions here
+Type the below and follow the on screen prompts.
+
+$ quiz
 
 ## Development
 
