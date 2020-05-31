@@ -1,7 +1,7 @@
 require_relative 'lib/quiz/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "soccer_quiz"
+  spec.name          = "soccer-quiz"
   spec.version       = Quiz::VERSION
   spec.authors       = ["Yarvin Hernandez"]
   spec.email         = ["yarvinhhernandez@gmail.com"]
@@ -24,10 +24,10 @@ Gem::Specification.new do |spec|
          `git ls-files -z`.split("\x0").reject { |f|  f.match(%r{^(test|spec|features)/}) }
     end
   # spec.files = ["bin/quiz","lib/quiz.rb","lib/quiz/balon_d_or.rb","lib/quiz/cli.rb","lib/quiz/champion_league.rb","lib/quiz/scraper.rb","lib/quiz/version.rb","lib/quiz/world_cup.rb","config/environment.rb"]
-    # spec.bindir        = "exe"
+  spec.bindir        = "exe"
   spec.require_paths = ["lib"]
-  # spec.executables << "quiz"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.executables << "quiz"
+  # spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rspec"
