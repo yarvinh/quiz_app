@@ -3,7 +3,6 @@ require 'nokogiri'
 require 'open-uri'
 
 require_relative '../lib/quiz'
-
 require_relative '../lib/quiz/scraper'
 require_relative '../lib/quiz/balon_d_or'
 require_relative '../lib/quiz/champion_league'
