@@ -1,6 +1,3 @@
-# require 'nokogiri'
-# require 'open-uri'
-
 #scraper Class
 class Quiz::Scraper
     def self.scraper(url,clas)
