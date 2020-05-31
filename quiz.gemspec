@@ -26,7 +26,7 @@ Gem::Specification.new do |spec|
   spec.files = ["bin/quiz","lib/quiz.rb","lib/quiz/balon_d_or.rb","lib/quiz/cli.rb","lib/quiz/champion_league.rb","lib/quiz/scraper.rb","lib/quiz/version.rb","lib/quiz/world_cup.rb","config/environment.rb"]
     # spec.bindir        = "exe"
   spec.require_paths = ["lib"]
-   spec.executables << "quiz"
+  spec.executables << "quiz"
   #  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   
   spec.add_development_dependency "bundler"
