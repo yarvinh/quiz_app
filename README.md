@@ -20,7 +20,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install quiz-0.1.0.gem
+    $ gem install quiz
 
 ## Usage
 
