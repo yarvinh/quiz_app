@@ -23,8 +23,11 @@ class Quiz::CLI
     end
     
     def start_quiz(balon_d_or,champion_league,world_cup)
+        puts "*************************************************************************"
         puts "Take this 10 question quiz to find out how much you know about soccer."
+        puts "*************************************************************************"
         puts "You pass the test if you score 6 or more points."
+        puts "*************************************************************************"
         puts "To take the quiz press enter, to exit press 1 and enter."
         input = gets
         while input.to_i != 1
@@ -32,6 +35,7 @@ class Quiz::CLI
             puts "To take the quiz one more time press enter. to exit press 1 and enter."
             input = gets   
         end
+        puts "Thanks for playing Soccer quiz."
     end
 
     def multiple_choice(answer,winners)
@@ -57,7 +61,7 @@ class Quiz::CLI
         else
             puts "Wrong. Right answer is #{multiple_choice.index(answer) + 1}: #{answer}." 
         end
-        puts "Press enter for next question"
+        puts "Press enter to continue"
         gets
     end
 
@@ -98,7 +102,7 @@ class Quiz::CLI
 
     def all_question(team, year)
         ["Who won the world cup in #{year}?",
-         "Who was the host in #{year} world cup",
+         "Who was the host in #{year} world cup?",
          "#{team} won the World cup final in #{year}. Who was the runner-up?",
          "How many world cup #{team} has won?", 
          "Who won the champion leage in #{year}?",
