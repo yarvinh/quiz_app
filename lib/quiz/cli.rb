@@ -3,26 +3,10 @@ class Quiz::CLI
     @@points = []
     def call
         puts "Welcome to football soccer quiz." 
-        champion_league_url = "https://en.wikipedia.org/wiki/List_of_European_Cup_and_UEFA_Champions_League_finals"
-        champion_league_file = Quiz::Scraper.champion_league(champion_league_url,"tbody")
-        Quiz::CHAMPIONLEAGUE.champion_league_files(champion_league_file)
-        champion_league = Quiz::CHAMPIONLEAGUE.all
-
-        world_cup_url = "https://www.foxsports.com/soccer/fifa-world-cup/history"
-        world_cup = Quiz::Scraper.world_cup(world_cup_url,"tbody")
-        Quiz::Worldcup.world_cup_file(world_cup)
-        world_cup = Quiz::Worldcup.all
-
-
-        balon_d_or_url = "https://www.goal.com/es/noticias/todos-los-ganadores-del-balon-de-oro/wn19xivn1eh91t0jrslbzz5kq"
-        players = Quiz::Scraper.balon_d_or_players(balon_d_or_url,".tableizer-table")
-        Quiz::BALONDOR.balon_d_or(players)
-        balon_d_or = Quiz::BALONDOR.all
-         
-        start_quiz(balon_d_or,champion_league,world_cup) 
+        start_quiz
     end
     
-    def start_quiz(balon_d_or,champion_league,world_cup)
+    def start_quiz
         puts "*************************************************************************"
         puts "Take this 10 question quiz to find out how much you know about soccer."
         puts "*************************************************************************"
@@ -30,8 +14,10 @@ class Quiz::CLI
         puts "*************************************************************************"
         puts "To take the quiz press enter, to exit press 1 and enter."
         input = gets
+
+
         while input.to_i != 1
-            question_processor(balon_d_or,champion_league,world_cup)
+            question_processor
             puts "To take the quiz one more time press enter. to exit press 1 and enter."
             input = gets   
         end
@@ -41,7 +27,7 @@ class Quiz::CLI
     def multiple_choice(answer,winners)
         multiple_choice = []
         multiple_choice << answer
-        until multiple_choice.size == 4  
+        until multiple_choice.size == 4   
             multiple_choice << winners.sample
             multiple_choice = multiple_choice.uniq
         end
@@ -65,40 +51,39 @@ class Quiz::CLI
         gets
     end
 
-     def question_selector(objects,question) 
-       years = objects.map{|item| item.year} 
-       winners = objects.map{|item|item.winner}
-       hosts = objects.map{|item|item.host}
-       runner_ups = objects.map{|item|item.runner_up}
-       random_year = years.sample
-       random_winner = winners.sample
-       answer = objects.select{|item|item.year == random_year}
-       titles_amount = objects.select{|item|item.winner == random_winner}.size
-       winner = answer[0].winner
-       host = answer[0].host
-       runner_up = answer[0].runner_up
-       
-       if all_question("none",random_year)[question].include?("host")
-           puts all_question(host,random_year)[question]
-           multiple_choice(host,hosts)
-       elsif all_question("none",random_year)[question].include?("runner-up")
-           runner_ups = runner_ups.reject{|item| item == winner}
-           puts all_question(winner,random_year)[question]
-           multiple_choice(runner_up,runner_ups)
+    def question_selector(objects,question) 
+        years = objects.map{|item| item.year} 
+        winners = objects.map{|item|item.winner}
+        hosts = objects.map{|item|item.host}
+        runner_ups = objects.map{|item|item.runner_up}
+        random_year = years.sample
+        random_winner = winners.sample
+        answer = objects.select{|item|item.year == random_year}
+        titles_amount = objects.select{|item|item.winner == random_winner}.size
+        winner = answer[0].winner
+        host = answer[0].host
+        runner_up = answer[0].runner_up
+        if all_question("none",random_year)[question].include?("host")
+            puts all_question(host,random_year)[question]
+            multiple_choice(host,hosts)
+        elsif all_question("none",random_year)[question].include?("runner-up")
+            runner_ups = runner_ups.reject{|item| item == winner}
+            puts all_question(winner,random_year)[question]
+            multiple_choice(runner_up,runner_ups)
        elsif all_question("none",random_year)[question].include?("How many")
-           puts all_question(random_winner,'none')[question]
-           obtions = []
-           counter = 1
-           while obtions.size < 13
-               obtions << counter
-               counter += 1
+            puts all_question(random_winner,'none')[question]
+            obtions = []
+            counter = 1
+            while obtions.size < 13
+                obtions << counter
+                counter += 1
             end
-         multiple_choice(titles_amount,obtions)
-       else 
-           puts all_question(winner,random_year)[question]
-           multiple_choice(winner,winners)
-       end
-     end
+        multiple_choice(titles_amount,obtions)
+        else 
+            puts all_question(winner,random_year)[question]
+            multiple_choice(winner,winners)
+        end
+    end
 
     def all_question(team, year)
         ["Who won the world cup in #{year}?",
@@ -113,52 +98,50 @@ class Quiz::CLI
          "How many Champion league #{team} has won?"         
         ]
     end
+   
 
+    def question_processor
+        Quiz::CHAMPIONLEAGUE.champion_league_files(Quiz::Scraper.champion_league)
+        Quiz::Worldcup.world_cup_file(Quiz::Scraper.world_cup)
+        Quiz::BALONDOR.balon_d_or(Quiz::Scraper.balon_d_or_players)
+        champion_league = Quiz::CHAMPIONLEAGUE.all
+        world_cup = Quiz::Worldcup.all
+        balon_d_or = Quiz::BALONDOR.all
 
-    def question_processor(balon_d_or,champion_leage,world_cup)
         last_20_champions = []
         counter = 44
-        while counter < champion_leage.size
-           last_20_champions << champion_leage[counter]
+        while counter < champion_league.size
+           last_20_champions << champion_league[counter]
            counter += 1
-        end 
-        #    question_counter = 0
-        #     until question_counter == 9
-        #         if question_counter < 4
-        #             question_selector(world_cup,question_counter)
-        #         elsif question_counter > 4 && question_counter < 7
-        #             question_selector(last_20_champions,question_counter)
-        #         elsif question_counter > 6 && question_counter < 9 
-        #         question_selector(balon_d_or,question_counter)
-        #         else question_selector(champion_leage,question_counter) 
-        #         question_counter += 1
-        #  end
-                question_selector(world_cup,0)
-                question_selector(world_cup,1)
-                question_selector(world_cup,2)
-                question_selector(world_cup,3) 
-                question_selector(last_20_champions,4) 
-                question_selector(last_20_champions,5)
-                question_selector(last_20_champions,6)
-                question_selector(balon_d_or,7)                
-                question_selector(balon_d_or,8)              
-                question_selector(champion_leage,9)  
-                 points = 0
-                @@points.each{|i|points += i }
-                if points > 5
-                puts "Congratulation you score #{points} of 10 points."
-                else puts "Sorry you failed. you score #{points} of 10 points."
-                end
-                Quiz::CLI.clear
         end
+        question_selector(world_cup,0)
+        question_selector(world_cup,1)
+        question_selector(world_cup,2)
+        question_selector(world_cup,3) 
+        question_selector(last_20_champions,4) 
+        question_selector(last_20_champions,5)
+        question_selector(last_20_champions,6)
+        question_selector(balon_d_or,7)                
+        question_selector(balon_d_or,8)              
+        question_selector(champion_league,9)  
+        points = 0
+        @@points.each{|i|points += i }
+        if points > 5
+            puts "Congratulation you score #{points} of 10 points."
+        else puts "Sorry you failed. you score #{points} of 10 points."
+        end
+        Quiz::CLI.clear
+    end
 
     def self.points
         @@points
     end
+
     def self.clear
         @@points.clear
     end   
 end
+
 
 
 
