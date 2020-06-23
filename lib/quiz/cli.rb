@@ -58,11 +58,15 @@ class Quiz::CLI
         runner_ups = objects.map{|item|item.runner_up}
         random_year = years.sample
         random_winner = winners.sample
-        answer = objects.select{|item|item.year == random_year}
-        titles_amount = objects.select{|item|item.winner == random_winner}.size
-        winner = answer[0].winner
-        host = answer[0].host
-        runner_up = answer[0].runner_up
+
+        instace_for_answers = objects.select{|item|item.year == random_year}
+        
+        answer_for_how_many = objects.select{|item|item.winner == random_winner}.size
+
+        winner = instace_for_answers[0].winner
+        
+        host = instace_for_answers[0].host
+        runner_up = instace_for_answers[0].runner_up
         if all_question("none",random_year)[question].include?("host")
             puts all_question(host,random_year)[question]
             multiple_choice(host,hosts)
@@ -78,7 +82,7 @@ class Quiz::CLI
                 obtions << counter
                 counter += 1
             end
-        multiple_choice(titles_amount,obtions)
+        multiple_choice(answer_for_how_many,obtions)
         else 
             puts all_question(winner,random_year)[question]
             multiple_choice(winner,winners)

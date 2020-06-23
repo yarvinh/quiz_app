@@ -33,7 +33,7 @@ class Quiz::Scraper
             all_countries << {:year => world_cup[0][counter], :host => world_cup[0][counter + 1], :winner => world_cup[0][counter + 2], :runner_up => world_cup[0][counter + 3], :thirth_place => world_cup[0][counter + 4]}
             counter += 9
        end
-       all_countries
+        all_countries
     end
 
    def self.champion_league
@@ -42,8 +42,8 @@ class Quiz::Scraper
         champions = self.scraper(champion_league_url,champion_league_file).map{|l|l.text.split("\n").reject{|e|e.empty?}}
         2.times{champions.shift}
         10.times{champions[0].shift}
-        22.times{champions[0].pop}
-        champions[0].map{|item|item.strip}
+        25.times{champions[0].pop}#22 
+        champions[0].map{|item|item.strip}   
         counter = 0
         all_teams = []
         while  counter < champions[0].size
