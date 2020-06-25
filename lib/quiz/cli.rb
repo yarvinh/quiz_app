@@ -58,13 +58,9 @@ class Quiz::CLI
         runner_ups = objects.map{|item|item.runner_up}
         random_year = years.sample
         random_winner = winners.sample
-
-        instace_for_answers = objects.select{|item|item.year == random_year}
-        
+        instace_for_answers = objects.select{|item|item.year == random_year}   
         answer_for_how_many = objects.select{|item|item.winner == random_winner}.size
-
-        winner = instace_for_answers[0].winner
-        
+        winner = instace_for_answers[0].winner      
         host = instace_for_answers[0].host
         runner_up = instace_for_answers[0].runner_up
         if all_question("none",random_year)[question].include?("host")
@@ -81,7 +77,7 @@ class Quiz::CLI
             while obtions.size < 13
                 obtions << counter
                 counter += 1
-            end
+            end 
         multiple_choice(answer_for_how_many,obtions)
         else 
             puts all_question(winner,random_year)[question]
@@ -105,13 +101,9 @@ class Quiz::CLI
    
 
     def question_processor
-        Quiz::CHAMPIONLEAGUE.champion_league_files(Quiz::Scraper.champion_league)
-        Quiz::Worldcup.world_cup_file(Quiz::Scraper.world_cup)
-        Quiz::BALONDOR.balon_d_or(Quiz::Scraper.balon_d_or_players)
         champion_league = Quiz::CHAMPIONLEAGUE.all
         world_cup = Quiz::Worldcup.all
         balon_d_or = Quiz::BALONDOR.all
-
         last_20_champions = []
         counter = 44
         while counter < champion_league.size

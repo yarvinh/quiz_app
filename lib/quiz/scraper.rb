@@ -18,8 +18,9 @@ class Quiz::Scraper
         while counter < players[0].size
             all_players << {:winner => players[0][counter],:year => players[0][counter + 1]}
             counter += 2
-        end
-            all_players
+        end  
+        Quiz::BALONDOR.balon_d_or(all_players)
+        all_players
     end
 
   
@@ -33,13 +34,14 @@ class Quiz::Scraper
             all_countries << {:year => world_cup[0][counter], :host => world_cup[0][counter + 1], :winner => world_cup[0][counter + 2], :runner_up => world_cup[0][counter + 3], :thirth_place => world_cup[0][counter + 4]}
             counter += 9
        end
-        all_countries
+       Quiz::Worldcup.world_cup_file(all_countries)   
+       all_countries
     end
 
    def self.champion_league
         champion_league_url = "https://en.wikipedia.org/wiki/List_of_European_Cup_and_UEFA_Champions_League_finals"
         champion_league_file  = "tbody"
-        champions = self.scraper(champion_league_url,champion_league_file).map{|l|l.text.split("\n").reject{|e|e.empty?}}
+        champions = self.scraper(champion_league_url,champion_league_file).map{|l|l.text.split("\n").reject{|e| e.empty?}}
         2.times{champions.shift}
         10.times{champions[0].shift}
         25.times{champions[0].pop}#22 
@@ -50,6 +52,7 @@ class Quiz::Scraper
            all_teams << {:year => champions[0][counter], :winner => champions[0][counter + 2], :score => champions[0][counter + 3], :runner_up => champions[0][counter + 5], :host => champions[0][counter + 6]} 
            counter += 8                       
         end
+        Quiz::CHAMPIONLEAGUE.champion_league_files(all_teams)
         all_teams
    end
 end
