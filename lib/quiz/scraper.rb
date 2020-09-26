@@ -50,7 +50,7 @@ class Quiz::Scraper
            all_teams << {:year => champions[0][counter], :winner => champions[0][counter + 2], :score => champions[0][counter + 3], :runner_up => champions[0][counter + 5], :host => champions[0][counter + 6]} 
            counter += 8                       
         end
-        p all_teams
+         all_teams
    end
 end
 
