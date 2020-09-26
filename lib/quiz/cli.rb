@@ -101,6 +101,9 @@ class Quiz::CLI
    
 
     def question_processor
+        Quiz::CHAMPIONLEAGUE.champion_league_files(Quiz::Scraper.champion_league)
+        Quiz::Worldcup.world_cup_file(Quiz::Scraper.world_cup)
+        Quiz::BALONDOR.balon_d_or(Quiz::Scraper.balon_d_or_players)
         champion_league = Quiz::CHAMPIONLEAGUE.all
         world_cup = Quiz::Worldcup.all
         balon_d_or = Quiz::BALONDOR.all
@@ -129,14 +132,19 @@ class Quiz::CLI
         Quiz::CLI.clear
     end
 
+  
+
+
     def self.points
         @@points
     end
 
     def self.clear
         @@points.clear
-    end   
+    end  
+
 end
+
 
 
 
