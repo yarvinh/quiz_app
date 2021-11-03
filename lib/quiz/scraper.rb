@@ -39,11 +39,14 @@ class Quiz::Scraper
    def self.champion_league
         champion_league_url = "https://en.wikipedia.org/wiki/List_of_European_Cup_and_UEFA_Champions_League_finals"
         champion_league_file  = "tbody"
+        
         champions = self.scraper(champion_league_url,champion_league_file).map{|l|l.text.split("\n").reject{|e|e.empty?}}
-        2.times{champions.shift}
+        champions[0].shift
+        champions.shift
+        champions.shift
         10.times{champions[0].shift}
-        22.times{champions[0].pop}
-        champions[0].map{|item|item.strip}
+        23.times{champions[0].pop}
+        7.times{champions[0].delete_at(145)}
         counter = 0
         all_teams = []
         while  counter < champions[0].size
