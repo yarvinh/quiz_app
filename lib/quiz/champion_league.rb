@@ -5,7 +5,7 @@ class Quiz::CHAMPIONLEAGUE
         @@all << self
          file.each{|key,value|
          self.send("#{key}=", value)}
-         
+      
     end
     def self.champion_league_files(file)
         file.each{|e|Quiz::CHAMPIONLEAGUE.new(e)}  

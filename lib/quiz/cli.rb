@@ -114,7 +114,6 @@ class Quiz::CLI
         champion_league = Quiz::CHAMPIONLEAGUE.all
         world_cup = Quiz::Worldcup.all
         balon_d_or = Quiz::BALONDOR.all
-
         last_20_champions = []
         counter = 44
         while counter < champion_league.size
@@ -140,14 +139,19 @@ class Quiz::CLI
         Quiz::CLI.clear
     end
 
+  
+
+
     def self.points
         @@points
     end
 
     def self.clear
         @@points.clear
-    end   
+    end  
+
 end
+
 
 
 
