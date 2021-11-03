@@ -18,8 +18,8 @@ class Quiz::Scraper
         while counter < players[0].size
             all_players << {:winner => players[0][counter],:year => players[0][counter + 1]}
             counter += 2
-        end  
-        all_players
+        end
+            all_players
     end
 
   
@@ -32,14 +32,13 @@ class Quiz::Scraper
         while counter < world_cup[0].size
             all_countries << {:year => world_cup[0][counter], :host => world_cup[0][counter + 1], :winner => world_cup[0][counter + 2], :runner_up => world_cup[0][counter + 3], :thirth_place => world_cup[0][counter + 4]}
             counter += 9
-       end  
+       end
        all_countries
     end
 
    def self.champion_league
         champion_league_url = "https://en.wikipedia.org/wiki/List_of_European_Cup_and_UEFA_Champions_League_finals"
         champion_league_file  = "tbody"
-<<<<<<< HEAD
         
         champions = self.scraper(champion_league_url,champion_league_file).map{|l|l.text.split("\n").reject{|e|e.empty?}}
         champions[0].shift
@@ -48,20 +47,13 @@ class Quiz::Scraper
         10.times{champions[0].shift}
         23.times{champions[0].pop}
         7.times{champions[0].delete_at(145)}
-=======
-        champions = self.scraper(champion_league_url,champion_league_file).map{|l|l.text.split("\n").reject{|e| e.empty?}}
-        2.times{champions.shift}
-        10.times{champions[0].shift}
-        23.times{champions[0].pop}#22 
-        champions[0].map{|item|item.strip}   
->>>>>>> ff2a0c1db947b31ed6d6a23c51247b49b5251b20
         counter = 0
         all_teams = []
         while  counter < champions[0].size
            all_teams << {:year => champions[0][counter], :winner => champions[0][counter + 2], :score => champions[0][counter + 3], :runner_up => champions[0][counter + 5], :host => champions[0][counter + 6]} 
            counter += 8                       
         end
-         all_teams
+        all_teams
    end
 end
 
