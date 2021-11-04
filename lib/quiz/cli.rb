@@ -64,7 +64,7 @@ class Quiz::CLI
         instace_for_answers = objects.select{|item|item.year == random_year}
         
         answer_for_how_many = objects.select{|item|item.winner == random_winner}.size
-
+        answer_for_how_many
         winner = instace_for_answers[0].winner
         
         host = instace_for_answers[0].host
@@ -97,8 +97,8 @@ class Quiz::CLI
          "Who was the host in #{year} world cup?",
          "#{team} won the World cup final in #{year}. Who was the runner-up?",
          "How many world cup #{team} has won?", 
-         "Who won the champion leage in #{year}?",
-         "#{team} won the Champion leage final in #{year}. Who was the runner-up?",
+         "Who won the champion league in #{year}?",
+         "#{team} won the Champion league final in #{year}. Who was the runner-up?",
          "Who hosted champion league final in #{year}?",
          "Who won the balon d'Or in #{year}?",
          "How many balon de'or #{team} has won?",
@@ -137,6 +137,10 @@ class Quiz::CLI
         else puts "Sorry you failed. you score #{points} of 10 points."
         end
         Quiz::CLI.clear
+        Quiz::CHAMPIONLEAGUE.all.clear
+        Quiz::Worldcup.all.clear
+        Quiz::BALONDOR.all.clear
+
     end
 
   
