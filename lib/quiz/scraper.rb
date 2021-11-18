@@ -46,14 +46,14 @@ class Quiz::Scraper
         champions.shift
         10.times{champions[0].shift}
         23.times{champions[0].pop}
-        7.times{champions[0].delete_at(145)}
+        2.times{champions[0].delete_at(152)}
         counter = 0
         all_teams = []
         while  counter < champions[0].size
            all_teams << {:year => champions[0][counter], :winner => champions[0][counter + 2], :score => champions[0][counter + 3], :runner_up => champions[0][counter + 5], :host => champions[0][counter + 6]} 
            counter += 8                       
         end
-        all_teams
+         all_teams
    end
 end
 
