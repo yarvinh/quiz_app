@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    soccer-quiz (0.1.8)
+    soccer-quiz (0.2.1)
 
 GEM
   remote: https://rubygems.org/

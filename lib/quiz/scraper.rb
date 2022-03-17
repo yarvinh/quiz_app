@@ -9,17 +9,22 @@ class Quiz::Scraper
 
     def self.balon_d_or_players
         balon_d_or_url = "https://www.goal.com/es/noticias/todos-los-ganadores-del-balon-de-oro/wn19xivn1eh91t0jrslbzz5kq"
-        balon_de_or_files = ".tableizer-table"
-        players = self.scraper(balon_d_or_url,balon_de_or_files).map{|l|l.text.split(/\t|\*/).reject{|e|e.empty? || e.include?("(FIFA Balón de Oro)")}}
-        2.times{players[0].shift}
-        players[0][16] = "Lionel Messi"
+        balon_de_or_files = "table"
+
+        players = self.scraper(balon_d_or_url,balon_de_or_files).map{|l|l.text}
+        years = players[1].split(/\D/).reject{|e|e.empty?}
+        years[1] = "2020"
+        players = players[1].split(/\d/).reject{|e|e.empty?}
+        players[0] = "Lionel Messi"
+        players[1] = "Event was Cancel because Covi-19"
         counter = 0
         all_players = []
-        while counter < players[0].size
-            all_players << {:winner => players[0][counter],:year => players[0][counter + 1]}
-            counter += 2
+        while counter < players.size
+            all_players << {:winner => players[counter],:year => years[counter]}
+            counter += 1
         end
-            all_players
+
+           p all_players
     end
 
   
