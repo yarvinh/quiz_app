@@ -3,11 +3,12 @@ class Quiz::Scraper
 
 
     def self.scraper(url,clas)
-        doc = Nokogiri::HTML(open(url))
+        doc = Nokogiri::HTML(URI.open(url))
         doc.css(clas)
     end
 
     def self.balon_d_or_players
+       
         balon_d_or_url = "https://www.goal.com/es/noticias/todos-los-ganadores-del-balon-de-oro/wn19xivn1eh91t0jrslbzz5kq"
         balon_de_or_files = "table"
 
