@@ -28,39 +28,42 @@ class Quiz::Scraper
 
   
     def self.world_cup
-        world_cup_url = "https://www.foxsports.com/soccer/fifa-world-cup/history"
+        world_cup_url = "https://en.wikipedia.org/wiki/List_of_FIFA_World_Cup_finals"
         world_cup = "tbody"
-        
         world_cup = self.scraper(world_cup_url,world_cup).map{|l|l.text.split(/\r\n|\s{2,}/).reject{|e|e.empty?}}
+        world_cup = world_cup[3]
+        8.times{world_cup.shift}
+        3.times{world_cup.pop}
+
         counter = 0 
         all_countries = []
-        while counter < world_cup[0].size
-            all_countries << {:year => world_cup[0][counter], :host => world_cup[0][counter + 4], :winner => world_cup[0][counter + 1], :runner_up => world_cup[0][counter + 2], :thirth_place => world_cup[0][counter + 3]}
+        while counter < world_cup.size
+            all_countries << {:year => world_cup[counter], :host => world_cup[counter + 5], :winner => world_cup[counter + 1], :runner_up => world_cup[counter + 3]}
             counter += 8
        end
        all_countries
     end
-
-   def self.champion_league
+    def self.champion_league
         champion_league_url = "https://en.wikipedia.org/wiki/List_of_European_Cup_and_UEFA_Champions_League_finals"
         champion_league_file  = "tbody"
         
         champions = self.scraper(champion_league_url,champion_league_file).map{|l|l.text.split("\n").reject{|e|e.empty?}}
+
         champions[0].shift
         champions.shift
         champions.shift
-        10.times{champions[0].shift}
-        21.times{champions[0].pop}
+        8.times{champions[0].shift}
+      
+        14.times{champions[0].pop}
         2.times{champions[0].delete_at(152)}
-        champions
         counter = 0
         all_teams = []
         while  counter < champions[0].size
-           all_teams << {:year => champions[0][counter], :winner => champions[0][counter + 2], :score => champions[0][counter + 3], :runner_up => champions[0][counter + 5], :host => champions[0][counter + 6]} 
-           counter += 8                       
+           all_teams << {:year => champions[0][counter], :winner => champions[0][counter + 2], :score => champions[0][counter + 3], :runner_up => champions[0][counter + 4], :host => champions[0][counter + 6]} 
+           counter += 8                      
         end
-        all_teams
-   end
+       all_teams
+    end
 
 end
 
